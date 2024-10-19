@@ -2,9 +2,9 @@ package projetointegradorConn.model;
 public class Estoque {
     private int idItem;
     private String nome;
-    private int custo;
-    private int revenda;
-    private int lucro;
+    private double custo;
+    private double revenda;
+    private double lucro;
 
     public int getIdItem() {
         return idItem;
@@ -22,27 +22,27 @@ public class Estoque {
         this.nome = nome;
     }
 
-    public int getCusto() {
+    public double getCusto() {
         return custo;
     }
 
-    public void setCusto(int custo) {
+    public void setCusto(double custo) {
         this.custo = custo;
     }
 
-    public int getRevenda() {
+    public double getRevenda() {
         return revenda;
     }
 
-    public void setRevenda(int revenda) {
+    public void setRevenda(double revenda) {
         this.revenda = revenda;
     }
 
-    public int getLucro() {
+    public double getLucro() {
         return lucro;
     }
 
-    public void setLucro(int lucro) {
+    public void setLucro(double lucro) {
         this.lucro = lucro;
     }
 }

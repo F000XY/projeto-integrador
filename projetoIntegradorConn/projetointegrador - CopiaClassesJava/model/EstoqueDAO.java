@@ -12,11 +12,11 @@ public class EstoqueDAO {
 
         try (Connection conn = Conn.getConexao()) {
             try (PreparedStatement pstmtEstoque = conn.prepareStatement(sqlEstoque)) {
-                pstmtEstoque.setInt(1, estoque.getIdItem());
+                pstmtEstoque.setDouble(1, estoque.getIdItem());
                 pstmtEstoque.setString(2, estoque.getNome());
-                pstmtEstoque.setInt(3, estoque.getCusto());
-                pstmtEstoque.setInt(4, estoque.getRevenda());
-                pstmtEstoque.setInt(5, estoque.getLucro());
+                pstmtEstoque.setDouble(3, estoque.getCusto());
+                pstmtEstoque.setDouble(4, estoque.getRevenda());
+                pstmtEstoque.setDouble(5, estoque.getLucro());
                 pstmtEstoque.executeUpdate();
                 System.out.println("Item inserido com sucesso: " + estoque.getNome()); // Mensagem de sucesso
             }
