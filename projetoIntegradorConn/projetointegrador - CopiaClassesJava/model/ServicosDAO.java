@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ServicosDAO {
+public class
+
+ServicosDAO {
     public void inserirServico(Servicos servicos) {
         String sql = "INSERT INTO Servicos (idCliente, idEstoque) VALUES (?, ?)";
 

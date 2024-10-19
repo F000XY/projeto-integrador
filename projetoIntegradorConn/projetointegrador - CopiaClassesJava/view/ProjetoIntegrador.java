@@ -12,19 +12,23 @@ import projetointegradorConn.model.VendaDAO;
 import projetointegradorConn.model.Estoque;
 import projetointegradorConn.model.EstoqueDAO;
 
-
 public class ProjetoIntegrador {
-    public static void main(String[] args) {
+    // Criar um novo item de estoque
+    public static void inserirItemEstoque() {
         EstoqueDAO estoqueDAO = new EstoqueDAO();
-
-        // Criar um novo item de estoque (chinelo)
         Estoque chinelo = new Estoque();
-        chinelo.setIdItem(1); // Defina um ID único para o item
-        chinelo.setNome("Chinelo");
-        chinelo.setCusto(10); // Custo de 10
-        chinelo.setRevenda(20); // Preço de revenda de 20
-        chinelo.setLucro(10); // Lucro de 10 (revenda - custo)
+        chinelo.setIdItem(19);
+        chinelo.setNome("TesteOficial");
+        chinelo.setCusto(10);
+        chinelo.setRevenda(20);
+        chinelo.setLucro(10);
 
+        // Inserindo o item no estoque
+        estoqueDAO.inserirEstoque(chinelo);
+    }
+
+    // Criação Cadastro
+    public static Cliente criarCliente() {
         // Criando endereço
         Endereco endereco = new Endereco();
         endereco.setRua("Rua Exemplo");
@@ -42,7 +46,7 @@ public class ProjetoIntegrador {
 
         // Criando cliente
         Cliente cliente = new Cliente();
-        cliente.setIdCliente(3); // Defina o ID do cliente
+        cliente.setIdCliente(19);
         cliente.setNome("Nome do Cliente");
         cliente.setEmail(email);
         cliente.setEndereco(endereco);
@@ -52,18 +56,43 @@ public class ProjetoIntegrador {
         ClienteDAO clienteDAO = new ClienteDAO();
         clienteDAO.inserirCliente(cliente);
 
+        return cliente;
+    }
+
+    // Criação serviço
+    public static void criarUmServiço(Cliente cliente) {
         // Criando e inserindo um serviço
         Servicos servicos = new Servicos();
         servicos.setIdCliente(cliente.getIdCliente());
-        servicos.setIdEstoque(1); // Defina o ID do item do estoque
+        servicos.setIdEstoque(19);
         ServicosDAO servicosDAO = new ServicosDAO();
         servicosDAO.inserirServico(servicos);
+    }
 
+    // Criação Venda
+    public static void criarVenda() {
         // Criando e inserindo uma venda
         Venda venda = new Venda();
-        venda.setIdEstoque(1); // Defina o ID do item do estoque
-        venda.setQuantidade(2); // Defina a quantidade vendida
+        venda.setIdEstoque(19);
+        venda.setQuantidade(2);
         VendaDAO vendaDAO = new VendaDAO();
         vendaDAO.inserirVenda(venda);
+    }
+
+    public static void main(String[] args) {
+        // Insere um item no estoque
+       inserirItemEstoque();
+
+        // Cria um cliente
+        Cliente cliente = criarCliente();
+
+        // Cria um serviço associado ao cliente
+        criarUmServiço(cliente);
+
+        // Cria uma venda
+        criarVenda();
+
+        // Mensagem de sucesso
+        System.out.println("Processo concluído com sucesso!");
     }
 }

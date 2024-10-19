@@ -18,6 +18,7 @@ public class EstoqueDAO {
                 pstmtEstoque.setInt(4, estoque.getRevenda());
                 pstmtEstoque.setInt(5, estoque.getLucro());
                 pstmtEstoque.executeUpdate();
+                System.out.println("Item inserido com sucesso: " + estoque.getNome()); // Mensagem de sucesso
             }
         } catch (SQLException e) {
             e.printStackTrace();
