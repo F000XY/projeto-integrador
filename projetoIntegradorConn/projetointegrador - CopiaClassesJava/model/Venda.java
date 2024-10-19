@@ -1,6 +1,7 @@
 package projetointegradorConn.model;
 
 public class Venda {
+    //LIGADO A ESTOQUE
     private int idVenda;
 
     public int getIdVenda() {
