@@ -90,13 +90,13 @@ public class ProjetoIntegrador {
     }
 
     // Criação serviço
-    public static void criarUmServiço(Cliente cliente) {
+    public static void criarUmServiço() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Cadastro de Serviços:");
         Servicos servicos = new Servicos();
 
         System.out.println("Insira o ID do cliente: ");
-        servicos.setIdCliente(cliente.getIdCliente());
+        servicos.setIdCliente(sc.nextInt());
         sc.nextLine();
 
         System.out.println("Insira o codigo do Produto: ");
@@ -130,10 +130,10 @@ public class ProjetoIntegrador {
     //   inserirItemEstoque();
 
         // Cria um cliente
-     Cliente cliente = criarCliente();
+    // Cliente cliente = criarCliente();
 
         // Cria um serviço associado ao cliente
-    //    criarUmServiço(cliente);
+    //    criarUmServiço();
 
         // Cria uma venda
      //   criarVenda();
