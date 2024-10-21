@@ -15,6 +15,7 @@ public class ProjetoIntegrador {
             System.out.println("2. Criar Cliente");
             System.out.println("3. Criar Serviço");
             System.out.println("4. Criar Venda");
+
             System.out.println("5. Sair");
 
             int opcao = sc.nextInt();
