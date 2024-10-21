@@ -10,15 +10,14 @@ public class ClienteDAO {
 
 
     public void inserirCliente(Cliente cliente) {
-
         // Inserir Email, Endereco e Telefone
         String sqlEmail = "INSERT INTO Email (email) VALUES (?)";
         String sqlEndereco = "INSERT INTO Endereco (rua, cep, bairro, cidade) VALUES (?, ?, ?, ?)";
         String sqlTelefone = "INSERT INTO Telefone (telefone) VALUES (?)";
-        String sqlCliente = "INSERT INTO Cliente (idCliente, nome, idEndereco, idEmail, idTelefone) VALUES (?, ?, ?, ?, ?)";
+        String sqlCliente = "INSERT INTO Cliente (nome, idEndereco, idEmail, idTelefone) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conn.getConexao()) {
-            //Email
+            // Inserir Email
             int emailId = 0;
             try (PreparedStatement pstmtEmail = conn.prepareStatement(sqlEmail, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 pstmtEmail.setString(1, cliente.getEmail().getEmail());
@@ -31,7 +30,7 @@ public class ClienteDAO {
                 }
             }
 
-            //Endereço
+            // Inserir Endereço
             int enderecoId = 0;
             try (PreparedStatement pstmtEndereco = conn.prepareStatement(sqlEndereco, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 pstmtEndereco.setString(1, cliente.getEndereco().getRua());
@@ -47,7 +46,7 @@ public class ClienteDAO {
                 }
             }
 
-            //Telefone
+            // Inserir Telefone
             int telefoneId = 0;
             try (PreparedStatement pstmtTelefone = conn.prepareStatement(sqlTelefone, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 pstmtTelefone.setString(1, cliente.getTelefone().getTelefone());
@@ -60,19 +59,19 @@ public class ClienteDAO {
                 }
             }
 
-            //Cliente
+            // Inserir Cliente
             try (PreparedStatement pstmtCliente = conn.prepareStatement(sqlCliente)) {
-                pstmtCliente.setInt(1, cliente.getIdCliente());
-                pstmtCliente.setString(2, cliente.getNome());
-                pstmtCliente.setInt(3, enderecoId); // ID do Endereço
-                pstmtCliente.setInt(4, emailId);    // ID do Email
-                pstmtCliente.setInt(5, telefoneId);  // ID do Telefone
+                pstmtCliente.setString(1, cliente.getNome()); // Nome do Cliente
+                pstmtCliente.setInt(2, enderecoId);           // ID do Endereço
+                pstmtCliente.setInt(3, emailId);              // ID do Email
+                pstmtCliente.setInt(4, telefoneId);           // ID do Telefone
                 pstmtCliente.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updateCliente(Cliente cliente) {
         String sqlUpdateEmail = "UPDATE Email SET email = ? WHERE idEmail = ?";
         String sqlUpdateEndereco = "UPDATE Endereco SET rua = ?, cep = ?, bairro = ?, cidade = ? WHERE idEndereco = ?";
@@ -107,7 +106,7 @@ public class ClienteDAO {
             // Atualizando Cliente
             try (PreparedStatement pstmtCliente = conn.prepareStatement(sqlUpdateCliente)) {
                 pstmtCliente.setString(1, cliente.getNome());
-                pstmtCliente.setInt(2, cliente.getIdCliente()); // ID do Cliente
+            //    pstmtCliente.setInt(2, cliente.getIdCliente()); // ID do Cliente
                 pstmtCliente.executeUpdate();
             }
         } catch (SQLException e) {

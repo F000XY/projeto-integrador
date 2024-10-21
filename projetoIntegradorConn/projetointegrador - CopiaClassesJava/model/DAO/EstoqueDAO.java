@@ -10,17 +10,16 @@ import java.sql.SQLException;
 
 public class EstoqueDAO {
     public void inserirEstoque(Estoque estoque) {
-        String sqlEstoque = "INSERT INTO Estoque (idItem, nome, custo, revenda, lucro) VALUES (?, ?, ?, ?, ?)";
+        String sqlEstoque = "INSERT INTO Estoque (nome, custo, revenda, lucro) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conn.getConexao()) {
             try (PreparedStatement pstmtEstoque = conn.prepareStatement(sqlEstoque)) {
-                pstmtEstoque.setDouble(1, estoque.getIdItem());
-                pstmtEstoque.setString(2, estoque.getNome());
-                pstmtEstoque.setDouble(3, estoque.getCusto());
-                pstmtEstoque.setDouble(4, estoque.getRevenda());
-                pstmtEstoque.setDouble(5, estoque.getLucro());
+                pstmtEstoque.setString(1, estoque.getNome()); // Corrigido para 1
+                pstmtEstoque.setDouble(2, estoque.getCusto()); // Corrigido para 2
+                pstmtEstoque.setDouble(3, estoque.getRevenda()); // Corrigido para 3
+                pstmtEstoque.setDouble(4, estoque.getLucro()); // Corrigido para 4
                 pstmtEstoque.executeUpdate();
-                System.out.println("Item inserido com sucesso: " + estoque.getNome()); // Mensagem de sucesso
+                System.out.println("Item inserido com sucesso: " + estoque.getNome());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,7 +37,6 @@ public class EstoqueDAO {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 estoque = new Estoque();
-                estoque.setIdItem(rs.getInt("idItem"));
                 estoque.setNome(rs.getString("nome"));
                 estoque.setCusto(rs.getInt("custo"));
                 estoque.setRevenda(rs.getInt("revenda"));

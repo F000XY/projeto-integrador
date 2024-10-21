@@ -2,7 +2,8 @@ package projetointegradorConn.model.conn;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-public class Conn {
+
+public class ConnBKP {
 
     public static Connection getConexao() {
         try {
@@ -26,4 +27,21 @@ public class Conn {
         return null;
     }
 
+    public static void main(String[] args) {
+        Connection conn = getConexao(); // Chama o método para obter a conexão
+
+        if (conn != null) {
+            System.out.println("Conexão estabelecida com sucesso!");
+
+            // Fechar a conexão após o uso
+            try {
+                conn.close();
+                System.out.println("Conexão fechada com sucesso!");
+            } catch (SQLException e) {
+                System.out.println("Erro ao tentar fechar a conexão: " + e);
+            }
+        } else {
+            System.out.println("Erro ao estabelecer a conexão.");
+        }
+    }
 }
