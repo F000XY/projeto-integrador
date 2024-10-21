@@ -1,6 +1,7 @@
-package projetointegradorConn.model;
+package projetointegradorConn.model.DAO;
 
-import projetointegradorConn.controler.Conn;
+import projetointegradorConn.model.conn.Conn;
+import projetointegradorConn.model.servicos.Servicos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

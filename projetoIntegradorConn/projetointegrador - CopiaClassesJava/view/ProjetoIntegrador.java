@@ -1,144 +1,45 @@
 package projetointegradorConn.view;
-
-import projetointegradorConn.model.cadastro.Cliente;
-import projetointegradorConn.model.cadastro.Email;
-import projetointegradorConn.model.cadastro.Endereco;
-import projetointegradorConn.model.cadastro.Telefone;
-import projetointegradorConn.model.ClienteDAO;
-import projetointegradorConn.model.Servicos;
-import projetointegradorConn.model.ServicosDAO;
-import projetointegradorConn.model.Venda;
-import projetointegradorConn.model.VendaDAO;
-import projetointegradorConn.model.Estoque;
-import projetointegradorConn.model.EstoqueDAO;
-
-import java.sql.SQLOutput;
+import projetointegradorConn.controler.estoqueCRUD.EstoqueCRUD;
+import projetointegradorConn.controler.servicoCRUD.ServicoCRUD;
+import projetointegradorConn.controler.vendaCRUD.VendaCRUD;
+import projetointegradorConn.controler.cadastroCRUD.CadastroCRUD;
 import java.util.Scanner;
 public class ProjetoIntegrador {
 
-    // Criar um novo item de estoque
-    public static void inserirItemEstoque() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Cadastro de Estoque:");
-
-        EstoqueDAO estoqueDAO = new EstoqueDAO();
-        Estoque item = new Estoque();
-
-
-        System.out.println("Insira o nome do Produto: ");
-        String nome = sc.nextLine();
-
-        System.out.println("Insira o preço do Produto: ");
-        double custo = sc.nextDouble();
-        sc.nextLine();
-
-        System.out.println("Insira o preço da Revenda: ");
-        double revenda = sc.nextDouble();
-        sc.nextLine();
-
-        item.setNome(nome);
-        item.setCusto(custo);
-        item.setRevenda(revenda);
-
-        double lucro = revenda - custo;
-        item.setLucro(lucro);
-        System.out.println("O lucro calculado foi: " + lucro);
-
-        estoqueDAO.inserirEstoque(item);
-    }
-
-    // Criação Cadastro
-    public static Cliente criarCliente() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Cadastro de Cliente: ");
-
-        // Criando endereço
-        Endereco endereco = new Endereco();
-        System.out.println("Insira a rua: ");
-        endereco.setRua(sc.nextLine());
-        System.out.println("Insira o CEP: ");
-        endereco.setCep(sc.nextInt());
-        sc.nextLine();  // Consome o "Enter"
-        System.out.println("Insira o bairro: ");
-        endereco.setBairro(sc.nextLine());
-        System.out.println("Insira a cidade: ");
-        endereco.setCidade(sc.nextLine());
-
-        Email email = new Email();
-        System.out.println("Insira o email do cliente: ");
-        email.setEmail(sc.nextLine());  // Lê o email
-
-
-        Telefone telefone = new Telefone();
-        System.out.println("Insira o telefone do cliente: ");
-        telefone.setTelefone(sc.nextLine());  // Lê o telefone
-
-
-        Cliente cliente = new Cliente();
-        System.out.println("Insira o nome do cliente: ");
-        cliente.setNome(sc.nextLine());  // Lê o nome
-
-
-        cliente.setEmail(email);
-        cliente.setEndereco(endereco);
-        cliente.setTelefone(telefone);
-
-        ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.inserirCliente(cliente);
-
-        return cliente;
-    }
-
-    // Criação serviço
-    public static void criarUmServiço() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Cadastro de Serviços:");
-        Servicos servicos = new Servicos();
-
-        System.out.println("Insira o ID do cliente: ");
-        servicos.setIdCliente(sc.nextInt());
-        sc.nextLine();
-
-        System.out.println("Insira o codigo do Produto: ");
-        servicos.setIdEstoque(sc.nextInt());
-        sc.nextLine();
-
-        ServicosDAO servicosDAO = new ServicosDAO();
-        servicosDAO.inserirServico(servicos);
-    }
-
-    // Criação Venda
-    public static void criarVenda() {
-        // Criando e inserindo uma venda
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Cadastro de Venda:");
-        Venda venda = new Venda();
-        System.out.println("Insira o codigo do Produto:");
-        venda.setIdEstoque(sc.nextInt());
-        sc.nextLine();
-
-        System.out.println("Insira a quantidade do Produto:");
-        venda.setQuantidade(sc.nextInt());
-        sc.nextLine();
-
-        VendaDAO vendaDAO = new VendaDAO();
-        vendaDAO.inserirVenda(venda);
-    }
-
     public static void main(String[] args) {
-        // Insere um item no estoque
-    //   inserirItemEstoque();
+        Scanner sc = new Scanner(System.in);
 
-        // Cria um cliente
-    // Cliente cliente = criarCliente();
+        while (true) {
+            System.out.println("Escolha uma operação: ");
+            System.out.println("1. Inserir Item de Estoque");
+            System.out.println("2. Criar Cliente");
+            System.out.println("3. Criar Serviço");
+            System.out.println("4. Criar Venda");
+            System.out.println("5. Sair");
 
-        // Cria um serviço associado ao cliente
-    //    criarUmServiço();
+            int opcao = sc.nextInt();
+            sc.nextLine();
 
-        // Cria uma venda
-     //   criarVenda();
-
-        // Mensagem de sucesso
-      //  System.out.println("Processo concluído com sucesso!");
+            switch (opcao) {
+                case 1:
+                    EstoqueCRUD.inserirItemEstoque();
+                    break;
+                case 2:
+                    CadastroCRUD.criarCliente();
+                    break;
+                case 3:
+                    ServicoCRUD.criarUmServico();
+                    break;
+                case 4:
+                    VendaCRUD.criarVenda();
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+                    System.exit(0);
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
+            }
+        }
     }
 }
