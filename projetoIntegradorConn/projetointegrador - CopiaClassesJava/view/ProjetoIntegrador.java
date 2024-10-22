@@ -1,6 +1,6 @@
 package projetointegradorConn.view;
 import projetointegradorConn.controler.estoqueCRUD.EstoqueCRUD;
-import projetointegradorConn.controler.servicoCRUD.ServicoCRUD;
+import projetointegradorConn.controler.servicoCRUD.ServicosCRUD;
 import projetointegradorConn.controler.vendaCRUD.VendaCRUD;
 import projetointegradorConn.controler.cadastroCRUD.CadastroCRUD;
 
@@ -14,6 +14,7 @@ public class ProjetoIntegrador {
       //  CadastroCRUD.atualizarCliente(); --> OK
 
         //EstoqueCRUD.deletarItem(); --> OK
+        // ServicosCRUD.deletarServico(); --> OK
 
         // erro em relação ao get do email na hora de att -->
         // Atualização de Registros
@@ -41,7 +42,7 @@ public class ProjetoIntegrador {
                     CadastroCRUD.criarCliente();
                     break;
                 case 3:
-                    ServicoCRUD.criarUmServico();
+                    ServicosCRUD.criarUmServico();
                     break;
                 case 4:
                     VendaCRUD.criarVenda();

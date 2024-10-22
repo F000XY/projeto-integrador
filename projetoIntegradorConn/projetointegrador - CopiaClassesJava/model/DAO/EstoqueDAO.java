@@ -57,7 +57,7 @@ public class EstoqueDAO {
         try (Connection conn = Conn.getConexao()) {
             int itemId = 0;
 
-            // Obter os IDs relacionados (Email, Endereço, Telefone) antes de deletar o Cliente
+            // Obter serviço
             try (PreparedStatement pstmtGetCliente = conn.prepareStatement(sqlGetEstoque)) {
                 pstmtGetCliente.setInt(1, idEstoque);
                 try (ResultSet rs = pstmtGetCliente.executeQuery()) {
@@ -68,7 +68,7 @@ public class EstoqueDAO {
                 }
             }
 
-            // Deletar o item do estoque
+            // Deletar o serviço
             try (PreparedStatement pstmtEstoque = conn.prepareStatement(sqlDeleteEstoque)) {
                 pstmtEstoque.setInt(1, idEstoque);
                 pstmtEstoque.executeUpdate();

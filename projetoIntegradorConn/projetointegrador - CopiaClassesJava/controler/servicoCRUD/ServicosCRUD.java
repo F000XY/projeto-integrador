@@ -5,7 +5,7 @@ import projetointegradorConn.model.servicos.Servicos;
 
 import java.util.Scanner;
 
-public class ServicoCRUD {
+public class ServicosCRUD {
 
     // Criação serviço
     public static void criarUmServico() {
@@ -23,5 +23,18 @@ public class ServicoCRUD {
 
         ServicosDAO servicosDAO = new ServicosDAO();
         servicosDAO.inserirServico(servicos);
+    }
+    public static void deletarServico(){
+        Scanner sc = new Scanner(System.in);
+        ServicosDAO servicosDAO = new ServicosDAO();
+
+        System.out.println("Insira o ID do Serviço que deseja deletar: ");
+        int idOs = sc.nextInt();
+
+        // Chama a função para deletar o cliente
+        servicosDAO.deletarServico(idOs);
+
+        System.out.println("Serviço deletado com sucesso!");
+
     }
 }
