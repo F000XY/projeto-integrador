@@ -48,6 +48,28 @@ public class EstoqueDAO {
         }
         return estoque;
     }
+    public void atualizarEstoque(Estoque estoque) {
+        String sqlUpdate = "UPDATE Estoque SET nome = ?, custo = ?, revenda = ?, lucro = ? WHERE idItem = ?";
+
+        try (Connection conn = Conn.getConexao();
+             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
+            pstmt.setString(1, estoque.getNome());
+            pstmt.setDouble(2, estoque.getCusto());
+            pstmt.setDouble(3, estoque.getRevenda());
+            pstmt.setDouble(4, estoque.getLucro());
+            pstmt.setInt(5, estoque.getIdItem()); // Supondo que você tenha um método getIdItem() na classe Estoque
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Item atualizado com sucesso: " + estoque.getNome());
+            } else {
+                System.out.println("Nenhum item encontrado para atualizar com o ID: " + estoque.getIdItem());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void deletarItem(int idEstoque) {
         String sqlGetEstoque = "SELECT * FROM Estoque WHERE idItem = ?";

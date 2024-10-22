@@ -10,12 +10,16 @@ public class ProjetoIntegrador {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-       // CadastroCRUD.deletarCliente(); --> OK
-      //  CadastroCRUD.atualizarCliente(); --> OK
+         // CadastroCRUD.deletarCliente(); --> OK
+        // CadastroCRUD.atualizarCliente(); --> OK
 
         //EstoqueCRUD.deletarItem(); --> OK
+       // EstoqueCRUD.atualizarEstoque(); --> OK
+
         // ServicosCRUD.deletarServico(); --> OK
-         VendaCRUD.deletarVenda();
+
+        // VendaCRUD.deletarVenda();  --> OK
+
         // erro em relação ao get do email na hora de att -->
         // Atualização de Registros
         // Deleção ed registros

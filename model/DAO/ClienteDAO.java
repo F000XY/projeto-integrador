@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 public class ClienteDAO {
 
-
     public void inserirCliente(Cliente cliente) {
         // Inserir Email, Endereco e Telefone
         String sqlEmail = "INSERT INTO Email (email) VALUES (?)";
