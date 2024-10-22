@@ -3,13 +3,23 @@ import projetointegradorConn.controler.estoqueCRUD.EstoqueCRUD;
 import projetointegradorConn.controler.servicoCRUD.ServicoCRUD;
 import projetointegradorConn.controler.vendaCRUD.VendaCRUD;
 import projetointegradorConn.controler.cadastroCRUD.CadastroCRUD;
+
 import java.util.Scanner;
+
 public class ProjetoIntegrador {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        CadastroCRUD.deletarCliente();
+        CadastroCRUD.atualizarCliente();
 
+        // erro em relação ao get do email na hora de att -->
+        // Atualização de Registros
+        // Deleção ed registros
+        // Criação de registros
         while (true) {
+
+
             System.out.println("Escolha uma operação: ");
             System.out.println("1. Inserir Item de Estoque");
             System.out.println("2. Criar Cliente");

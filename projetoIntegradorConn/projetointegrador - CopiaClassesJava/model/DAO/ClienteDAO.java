@@ -73,46 +73,71 @@ public class ClienteDAO {
     }
 
     public void updateCliente(Cliente cliente) {
+        String sqlGetCliente = "SELECT idEmail, idEndereco, idTelefone FROM Cliente WHERE idCliente = ?";
         String sqlUpdateEmail = "UPDATE Email SET email = ? WHERE idEmail = ?";
         String sqlUpdateEndereco = "UPDATE Endereco SET rua = ?, cep = ?, bairro = ?, cidade = ? WHERE idEndereco = ?";
         String sqlUpdateTelefone = "UPDATE Telefone SET telefone = ? WHERE idTelefone = ?";
         String sqlUpdateCliente = "UPDATE Cliente SET nome = ? WHERE idCliente = ?";
 
         try (Connection conn = Conn.getConexao()) {
+            // Obtendo os IDs do cliente
+            int idCliente = cliente.getIdCliente();
+            int idEmail, idEndereco, idTelefone;
+
+            try (PreparedStatement pstmtGet = conn.prepareStatement(sqlGetCliente)) {
+                pstmtGet.setInt(1, idCliente);
+                try (ResultSet rs = pstmtGet.executeQuery()) {
+                    if (rs.next()) {
+                        idEmail = rs.getInt("idEmail");
+                        idEndereco = rs.getInt("idEndereco");
+                        idTelefone = rs.getInt("idTelefone");
+                    } else {
+                        throw new SQLException("Cliente não encontrado.");
+                    }
+                }
+            }
+
             // Atualizando Email
-            try (PreparedStatement pstmtEmail = conn.prepareStatement(sqlUpdateEmail)) {
-                pstmtEmail.setString(1, cliente.getEmail().getEmail());
-                pstmtEmail.setInt(2, cliente.getEmail().getIdEmail()); // ID do Email
-                pstmtEmail.executeUpdate();
+            if (cliente.getEmail() != null) {
+                try (PreparedStatement pstmtEmail = conn.prepareStatement(sqlUpdateEmail)) {
+                    pstmtEmail.setString(1, cliente.getEmail().getEmail());
+                    pstmtEmail.setInt(2, idEmail); // ID do Email obtido
+                    pstmtEmail.executeUpdate();
+                }
             }
 
             // Atualizando Endereço
-            try (PreparedStatement pstmtEndereco = conn.prepareStatement(sqlUpdateEndereco)) {
-                pstmtEndereco.setString(1, cliente.getEndereco().getRua());
-                pstmtEndereco.setInt(2, cliente.getEndereco().getCep());
-                pstmtEndereco.setString(3, cliente.getEndereco().getBairro());
-                pstmtEndereco.setString(4, cliente.getEndereco().getCidade());
-                pstmtEndereco.setInt(5, cliente.getEndereco().getIdEndereco()); // ID do Endereço
-                pstmtEndereco.executeUpdate();
+            if (cliente.getEndereco() != null) {
+                try (PreparedStatement pstmtEndereco = conn.prepareStatement(sqlUpdateEndereco)) {
+                    pstmtEndereco.setString(1, cliente.getEndereco().getRua());
+                    pstmtEndereco.setInt(2, cliente.getEndereco().getCep());
+                    pstmtEndereco.setString(3, cliente.getEndereco().getBairro());
+                    pstmtEndereco.setString(4, cliente.getEndereco().getCidade());
+                    pstmtEndereco.setInt(5, idEndereco); // ID do Endereço obtido
+                    pstmtEndereco.executeUpdate();
+                }
             }
 
             // Atualizando Telefone
-            try (PreparedStatement pstmtTelefone = conn.prepareStatement(sqlUpdateTelefone)) {
-                pstmtTelefone.setString(1, cliente.getTelefone().getTelefone());
-                pstmtTelefone.setInt(2, cliente.getTelefone().getIdTelefone()); // ID do Telefone
-                pstmtTelefone.executeUpdate();
+            if (cliente.getTelefone() != null) {
+                try (PreparedStatement pstmtTelefone = conn.prepareStatement(sqlUpdateTelefone)) {
+                    pstmtTelefone.setString(1, cliente.getTelefone().getTelefone());
+                    pstmtTelefone.setInt(2, idTelefone); // ID do Telefone obtido
+                    pstmtTelefone.executeUpdate();
+                }
             }
 
             // Atualizando Cliente
             try (PreparedStatement pstmtCliente = conn.prepareStatement(sqlUpdateCliente)) {
                 pstmtCliente.setString(1, cliente.getNome());
-            //    pstmtCliente.setInt(2, cliente.getIdCliente()); // ID do Cliente
+                pstmtCliente.setInt(2, idCliente); // ID do Cliente
                 pstmtCliente.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     // Função para deletar o Cliente e seus dados relacionados (email, endereço, telefone)
     //SQL -->
     public void deleteCliente(int idCliente) {
