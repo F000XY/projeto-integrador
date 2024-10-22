@@ -10,29 +10,13 @@ public class ProjetoIntegrador {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-         // CadastroCRUD.deletarCliente(); --> OK
-        // CadastroCRUD.atualizarCliente(); --> OK
-
-        //EstoqueCRUD.deletarItem(); --> OK
-       // EstoqueCRUD.atualizarEstoque(); --> OK
-
-        // ServicosCRUD.deletarServico(); --> OK
-
-        // VendaCRUD.deletarVenda();  --> OK
-
-        // erro em relação ao get do email na hora de att -->
-        // Atualização de Registros
-        // Deleção ed registros
-        // Criação de registros
         while (true) {
 
-
             System.out.println("Escolha uma operação: ");
-            System.out.println("1. Inserir Item de Estoque");
-            System.out.println("2. Criar Cliente");
-            System.out.println("3. Criar Serviço");
-            System.out.println("4. Criar Venda");
-
+            System.out.println("=-=-=-= 1. Menu do cadastro de Clientes =-=-=-=");
+            System.out.println("=-=-=-= 2. Menu do cadastro de Produtos =-=-=-=");
+            System.out.println("=-=-=-= 3. Menu do cadastro de Serviços =-=-=-=");
+            System.out.println("=-=-=-= 4. Menu do cadastro de Vendas =-=-=-=-=");
             System.out.println("5. Sair");
 
             int opcao = sc.nextInt();
@@ -40,16 +24,46 @@ public class ProjetoIntegrador {
 
             switch (opcao) {
                 case 1:
-                    EstoqueCRUD.inserirItemEstoque();
+                    while (true){
+                        System.out.println("1. Criar Cadastro // 2. Atualizar Cadastro // 3. Deletar Cadastro // 4. Sair");
+                        int subOpcao = sc.nextInt();
+                        if (subOpcao == 1) CadastroCRUD.criarCliente();
+                        else if (subOpcao ==2)CadastroCRUD.atualizarCliente();
+                        else if (subOpcao ==3)CadastroCRUD.deletarCliente();
+                        else if (subOpcao ==4) break;
+                        else{System.out.println("Opção invalida");}
+                    }
                     break;
                 case 2:
-                    CadastroCRUD.criarCliente();
+                    while (true){
+                        System.out.println("1. Criar Produto // 2. Atualizar Produto // 3. Deletar Produto // 4. Sair");
+                        int subOpcao2 = sc.nextInt();
+                        if (subOpcao2 == 1)EstoqueCRUD.inserirItemEstoque();
+                        else if (subOpcao2 ==2)EstoqueCRUD.atualizarEstoque();
+                        else if (subOpcao2 ==3)EstoqueCRUD.deletarItem();
+                        else if (subOpcao2 ==4) break;
+                        else{System.out.println("Opção invalida");}
+                    }
                     break;
                 case 3:
-                    ServicosCRUD.criarUmServico();
+                    while (true){
+                        System.out.println("1. Criar Seviço // 2. Deletar Serviço // 3. Sair");
+                        int subOpcao3 = sc.nextInt();
+                        if (subOpcao3 == 1)ServicosCRUD.criarUmServico();
+                        else if (subOpcao3 ==2)ServicosCRUD.deletarServico();
+                        else if (subOpcao3 ==3) break;
+                        else{System.out.println("Opção invalida");}
+                    }
                     break;
                 case 4:
-                    VendaCRUD.criarVenda();
+                    while (true){
+                        System.out.println("1. Criar Venda // 2. Deletar Venda // 3. Sair");
+                        int subOpcao4 = sc.nextInt();
+                        if (subOpcao4 == 1)VendaCRUD.criarVenda();
+                        else if (subOpcao4 ==2)VendaCRUD.deletarVenda();
+                        else if (subOpcao4 ==3) break;
+                        else{System.out.println("Opção invalida");}
+                    }
                     break;
                 case 5:
                     System.out.println("Saindo...");
