@@ -15,7 +15,7 @@ public class ProjetoIntegrador {
 
         //EstoqueCRUD.deletarItem(); --> OK
         // ServicosCRUD.deletarServico(); --> OK
-
+         VendaCRUD.deletarVenda();
         // erro em relação ao get do email na hora de att -->
         // Atualização de Registros
         // Deleção ed registros
