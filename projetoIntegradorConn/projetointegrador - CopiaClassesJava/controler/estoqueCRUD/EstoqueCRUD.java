@@ -1,5 +1,6 @@
 package projetointegradorConn.controler.estoqueCRUD;
 
+import projetointegradorConn.model.DAO.ClienteDAO;
 import projetointegradorConn.model.DAO.EstoqueDAO;
 import projetointegradorConn.model.estoque.Estoque;
 
@@ -34,5 +35,18 @@ public class EstoqueCRUD { // Criar um novo item de estoque
         System.out.println("O lucro calculado foi: " + lucro);
 
         estoqueDAO.inserirEstoque(item);
+    }
+    public static void deletarItem(){
+        Scanner sc = new Scanner(System.in);
+        EstoqueDAO estoqueDAO = new EstoqueDAO();
+
+        System.out.println("Insira o ID do item que deseja deletar: ");
+        int idItem = sc.nextInt();
+
+        // Chama a função para deletar o cliente
+        estoqueDAO.deletarItem(idItem);
+
+        System.out.println("Item deletado com sucesso!");
+
     }
 }
